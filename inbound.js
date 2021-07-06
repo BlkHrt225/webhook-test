@@ -6,8 +6,8 @@ const InDb = new DataStore({ filename: "./db/Incoming", autoload: true });
 const OutDb = new DataStore({ filename: "./db/OutGoing", autoload: true });
 
 const conn = mongoose.createConnection(
-  "mongodb+srv://rahul:GaRo1RlD2bauo80z@blkhrt.qw8ai.mongodb.net/test_DB?retryWrites=true&w=majority",
-  { useNewUrlParser: true }
+  "mongodb+srv://rahul:vArE7Bc6H3TiGMIn@blkhrt.qw8ai.mongodb.net/test_DB?retryWrites=true&w=majority",
+  { useNewUrlParser: true, useUnifiedTopology: true }
 );
 const userDB = conn.model("User", require("./db/user.schema"));
 
@@ -23,7 +23,7 @@ app.get("/getIn", (req, res) => {
     if (err) res.status(500);
     else {
       console.log(doc);
-     return res.send(doc);
+      return res.send(doc);
     }
   });
 });
@@ -39,14 +39,14 @@ app.get("/getMis", (req, res) => {
 app.post("/postOut", (req, res) => {
   //   const record = ({ Caller, Callee, Time } = req.body);
   const { Caller, Callee, Time } = req.body;
-  userDB.create({ Caller, Callee, Time }, async (err, doc) => {
+  userDB.create({ Caller, Callee, Time }, (err, doc) => {
     if (err) console.log(err);
     if (doc) console.log(doc);
   });
 });
 app.get("/incoming", (req, res) => {
   var record = req.query;
-  userDB.create({ record }, async (err, doc) => {
+  userDB.create({ record }, (err, doc) => {
     if (err) console.log(err);
     if (doc) console.log(doc);
   });
