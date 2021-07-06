@@ -14,13 +14,13 @@ app.get("/",(req,res)=>{
 app.get("/getIn",(req,res)=>{
     InDb.find({status:'ANSWERED'},(err,doc)=>{
         if(err)res.status(500)
-        else(res.send(doc))
+        else{console.log(doc);(res.send(doc))}
     })
 })
 app.get('/getMis',(req,res)=>{
     InDb.find({status:'NOANSWER'},(err,doc)=>{
         if(err)res.status(500)
-        if(doc)res.send(doc)
+        if(doc){console.log(doc);res.send(doc)}
     })
 })
 app.post('/postOut',(req,res)=>{
