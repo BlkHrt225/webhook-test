@@ -4,15 +4,15 @@ const Schema = mongoose.Schema;
 const outgoingSchema = new Schema({
   Caller: {
     type: String,
-    required: true,
+    // required: true,
   },
   Time: {
     type: String,
-    required: true,
+    // required: true,
   },
   Callee: {
     type: String,
-    required: true,
+    // required: true,
   },
 });
 
