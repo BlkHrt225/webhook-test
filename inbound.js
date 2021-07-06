@@ -57,6 +57,7 @@ app.get("/incoming", async (req, res) => {
 });
 app.get("/getOut", async (req, res) => {
   const result = await outgoingDB.find({})
+  return res.json(result)
   consle.log(result);
 });
 app.listen(port, () => console.log("Running"));
