@@ -9,7 +9,7 @@ const conn = mongoose.createConnection(
   "mongodb+srv://rahul:vArE7Bc6H3TiGMIn@blkhrt.qw8ai.mongodb.net/test_DB?retryWrites=true&w=majority",
   { useNewUrlParser: true, useUnifiedTopology: true }
 );
-const userDB = conn.model("User", require("./db/user.schema"));
+const callerDB = conn.model("User", require("./db/callerInfo.schema"));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/getIn", (req, res) => {
-  userDB.find({ status: "ANSWERED" }, (err, doc) => {
+  callerDB.find({ status: "ANSWERED" }, (err, doc) => {
     if (err) res.status(500);
     else {
       console.log(doc);
@@ -28,7 +28,7 @@ app.get("/getIn", (req, res) => {
   });
 });
 app.get("/getMis", (req, res) => {
-  userDB.find({ status: "NOANSWER" }, (err, doc) => {
+  callerDB.find({ status: "NOANSWER" }, (err, doc) => {
     if (err) res.status(500);
     if (doc) {
       console.log(doc);
@@ -39,20 +39,27 @@ app.get("/getMis", (req, res) => {
 app.post("/postOut", (req, res) => {
   //   const record = ({ Caller, Callee, Time } = req.body);
   const { Caller, Callee, Time } = req.body;
-  userDB.create({ Caller, Callee, Time }, (err, doc) => {
+  callerDB.create({ Caller, Callee, Time }, (err, doc) => {
     if (err) console.log(err);
     if (doc) console.log(doc);
   });
 });
-app.get("/incoming", (req, res) => {
-  var record = req.query;
-  userDB.create({ record }, (err, doc) => {
-    if (err) console.log(err);
-    if (doc) console.log(doc);
+app.get("/incoming", async (req, res) => {
+  const { caller, time, agent, agentNo, status } = req.query;
+  const callerInfo = await callerDB.create({
+    caller,
+    time,
+    agent,
+    agentNo,
+    status,
   });
+  console.log(callerInfo);
+  if (callerInfo) {
+    return res.json(callerInfo);
+  }
 });
 app.get("/getOut", (req, res) => {
-  userDB.find({}, (err, doc) => {
+  callerDB.find({}, (err, doc) => {
     if (err) res.status(500);
     if (doc) res.send(doc);
   });
