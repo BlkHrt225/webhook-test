@@ -10,6 +10,6 @@ app.get("/",(req,res)=>{
 
 
 app.get("/incoming",(req,res)=>{
-    console.log(req.params)
+    console.log(req.query)
 })
 app.listen(port,()=>console.log('Running'))
