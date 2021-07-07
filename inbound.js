@@ -38,6 +38,7 @@ app.get("/getMis", (req, res) => {
 });
 app.post("/postOut", async (req, res) => {
   const { Caller, Callee, Time } = req.body;
+
   const outgoingCallerInfo = await outgoingDB.create({ Caller, Callee, Time });
   console.log(outgoingCallerInfo);
 });
@@ -56,8 +57,8 @@ app.get("/incoming", async (req, res) => {
   }
 });
 app.get("/getOut", async (req, res) => {
-  const result = await outgoingDB.find({})
-  console.log(result)
+  var result = await outgoingDB.find({})
+  result.Callee = result.Callee.substring(1);
   return res.json(result)
 });
 app.listen(port, () => console.log("Running"));
