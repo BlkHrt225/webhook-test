@@ -58,7 +58,7 @@ app.get("/incoming", async (req, res) => {
 });
 app.get("/getOut", async (req, res) => {
   var result = await outgoingDB.find({})
-  result.Callee = result.Callee.substring(1);
+  
   return res.json(result)
 });
 app.listen(port, () => console.log("Running"));
