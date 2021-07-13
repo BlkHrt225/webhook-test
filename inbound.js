@@ -1,16 +1,33 @@
 const express = require("express");
 const app = express();
-const mongoose = require("mongoose");
+const mysql = require('mysql')
 const DataStore = require("nedb");
 const InDb = new DataStore({ filename: "./db/Incoming", autoload: true });
 const OutDb = new DataStore({ filename: "./db/OutGoing", autoload: true });
 
-const conn = mongoose.createConnection(
-  "mongodb+srv://rahul:vArE7Bc6H3TiGMIn@blkhrt.qw8ai.mongodb.net/test_DB?retryWrites=true&w=majority",
-  { useNewUrlParser: true, useUnifiedTopology: true }
-);
-const callerDB = conn.model("User", require("./db/callerInfo.schema"));
-const outgoingDB = conn.model("outgoing", require("./db/outgoing.schema"));
+
+// const conn = mongoose.createConnection(
+//   "mongodb+srv://rahul:vArE7Bc6H3TiGMIn@blkhrt.qw8ai.mongodb.net/test_DB?retryWrites=true&w=majority",
+//   { useNewUrlParser: true, useUnifiedTopology: true }
+// );
+const conn = mysql.createConnection({
+  host:'159.89.172.29',
+  database:'wbypeudnns',
+  user:'wbypeudnns',
+  password:'tKRxE8hynR',
+})
+ conn.connect(function(err) {
+  if (err) {
+    console.error('error connecting: ' + err.stack);
+    return;
+  }
+ 
+  console.log('connected as id ' + connection.threadId);
+});
+
+
+// const callerDB = conn.model("User", require("./db/callerInfo.schema"));
+// const outgoingDB = conn.model("outgoing", require("./db/outgoing.schema"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 const port = process.env.PORT || 3000;
@@ -61,4 +78,4 @@ app.get("/getOut", async (req, res) => {
   
   return res.json(result)
 });
-app.listen(port, () => console.log("Running"));
+app.listen(port, () => console.log(`Running on ${port}`));
