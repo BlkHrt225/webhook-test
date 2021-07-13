@@ -10,20 +10,20 @@ const OutDb = new DataStore({ filename: "./db/OutGoing", autoload: true });
 //   "mongodb+srv://rahul:vArE7Bc6H3TiGMIn@blkhrt.qw8ai.mongodb.net/test_DB?retryWrites=true&w=majority",
 //   { useNewUrlParser: true, useUnifiedTopology: true }
 // );
-const conn = mysql.createConnection({
-  host:'159.89.172.29',
-  database:'wbypeudnns',
-  user:'wbypeudnns',
-  password:'tKRxE8hynR',
-})
- conn.connect(function(err) {
-  if (err) {
-    console.error('error connecting: ' + err.stack);
-    return;
-  }
+// const conn = mysql.createConnection({
+//   host:'159.89.172.29',
+//   database:'wbypeudnns',
+//   user:'wbypeudnns',
+//   password:'tKRxE8hynR',
+// })
+//  conn.connect(function(err) {
+//   if (err) {
+//     console.error('error connecting: ' + err.stack);
+//     return;
+//   }
  
-  console.log('connected as id ' + connection.threadId);
-});
+//   console.log('connected as id ' + connection.threadId);
+// });
 
 
 // const callerDB = conn.model("User", require("./db/callerInfo.schema"));
