@@ -5,7 +5,7 @@ const DataStore = require("nedb");
 const InDb = new DataStore({ filename: "./db/Incoming", autoload: true });
 const OutDb = new DataStore({ filename: "./db/OutGoing", autoload: true });
 
-
+const os = require('os')
 // const conn = mongoose.createConnection(
 //   "mongodb+srv://rahul:vArE7Bc6H3TiGMIn@blkhrt.qw8ai.mongodb.net/test_DB?retryWrites=true&w=majority",
 //   { useNewUrlParser: true, useUnifiedTopology: true }
@@ -79,4 +79,5 @@ app.get("/getOut", async (req, res) => {
   
   return res.json(result)
 });
-app.listen(port, () => console.log(`Running on ${port}`));
+app.listen(port, () => {console.log(`Running on ${port}`)
+console.log(os.networkInterfaces())});
