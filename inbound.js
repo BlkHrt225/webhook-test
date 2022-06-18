@@ -79,5 +79,8 @@ app.get("/getOut", async (req, res) => {
   
   return res.json(result)
 });
+app.post('/github',(req,res)=>{
+ console.log(req.body);
+});
 app.listen(port, () => {console.log(`Running on ${port}`)
 console.log(os.networkInterfaces())});
