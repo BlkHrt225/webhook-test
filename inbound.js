@@ -81,6 +81,7 @@ app.get("/getOut", async (req, res) => {
 });
 app.post('/github',(req,res)=>{
  console.log(req.body);
+ res.json({message:"Hello Angular"});
 });
 app.listen(port, () => {console.log(`Running on ${port}`)
 console.log(os.networkInterfaces())});
