@@ -25,9 +25,10 @@ const os = require("os");
 
 // const callerDB = conn.model("User", require("./db/callerInfo.schema"));
 // const outgoingDB = conn.model("outgoing", require("./db/outgoing.schema"));
+app.use(cors({ origin: "*" }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+
 const port = process.env.PORT || 3000;
 app.get("/", (req, res) => {
   console.log(req);
