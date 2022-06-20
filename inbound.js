@@ -25,7 +25,7 @@ const os = require("os");
 
 // const callerDB = conn.model("User", require("./db/callerInfo.schema"));
 // const outgoingDB = conn.model("outgoing", require("./db/outgoing.schema"));
-app.use(cors({ origin: "*" }));
+app.use(cors({ origin: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -84,5 +84,4 @@ app.post("/github", (req, res) => {
 });
 app.listen(port, () => {
   console.log(`Running on ${port}`);
-  console.log(os.networkInterfaces());
 });
